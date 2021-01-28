@@ -177,13 +177,13 @@ namespace VäderDataForms
                     resultList = OutdoorQuery.SearchOutdoors(date);
 
                 }
-                else if (checkBoxIndoor.Checked) 
+                else if (checkBoxIndoor.Checked)
                 {
                     DateTime date = Convert.ToDateTime(dateInput.Text);
                     resultList = IndoorQuery.SearchIndoors(date);
                 }
-                
-                if(resultList != null)
+
+                if (resultList != null)
                 {
                     listView1.Columns.Add("Datum", 90, HorizontalAlignment.Center);
                     listView1.Columns.Add("Medeltemperatur", 120, HorizontalAlignment.Center);
@@ -202,7 +202,7 @@ namespace VäderDataForms
             }
             catch (Exception)
             {
-                faultyInputLabel.Visible = true;               
+                faultyInputLabel.Visible = true;
             }
         }
     }

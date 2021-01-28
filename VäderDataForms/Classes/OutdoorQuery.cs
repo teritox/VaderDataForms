@@ -10,6 +10,7 @@ namespace VäderDataForms.Classes
     class OutdoorQuery
     {
         private static List<string[]> ResultList = new List<string[]>();
+
         public static List<string[]> SearchOutdoors(DateTime date)
         {
 
@@ -56,8 +57,7 @@ namespace VäderDataForms.Classes
                 return ResultList;
             }
         }
-       
-
+      
         public static List<string[]> SortMostAridDayOutdoor()
         {
             using (EFContext Context = new EFContext())

@@ -10,6 +10,7 @@ namespace VäderDataForms.Classes
     class IndoorQuery
     {
         private static List<string[]> ResultList = new List<string[]>();
+
         public static List<string[]> SearchIndoors(DateTime date)
         {
             using (EFContext Context = new EFContext())
@@ -63,7 +64,6 @@ namespace VäderDataForms.Classes
                     .Where(t => t.Humidity != null)
                     .GroupBy(a => a.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, Avg = g.Average(a => a.Humidity) })
-                    .ToList()
                     .OrderBy(g => g.Avg);
 
                 ResultList.Clear();
