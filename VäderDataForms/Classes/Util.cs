@@ -8,6 +8,7 @@ namespace VäderDataForms.Classes
 {
     class Util
     {
+        //For calculating risk of mold of average temperature of a day.
         public static double MoldCalc(decimal? decHumidity, decimal? decTemp)
         {
             double humidity = (double)decHumidity;

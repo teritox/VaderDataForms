@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VäderDataForms.Models;
 
 namespace VäderDataForms.Classes
@@ -21,6 +22,7 @@ namespace VäderDataForms.Classes
 
                 using (EFContext Context = new EFContext())
                 {
+
                     if (Context.IndoorTemperatures.Count() == 0)
                     {
                         foreach (string data in dataLines)
@@ -29,6 +31,7 @@ namespace VäderDataForms.Classes
 
                             CultureInfo culture = new CultureInfo("en-US");
 
+                            //Seperates datalines into two different tables, one for indoor and one for outdoors.
                             try
                             {
                                 if (keyValue[1] == "Ute")
@@ -50,8 +53,7 @@ namespace VäderDataForms.Classes
                             }
                             catch
                             {
-                                Console.WriteLine("En rad uteblev.");
-
+                                MessageBox.Show("En rad ur den inlästa filen kunde inte importeras.");
                             }
 
                         }

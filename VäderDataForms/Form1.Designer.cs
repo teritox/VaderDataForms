@@ -63,7 +63,7 @@ namespace VäderDataForms
             "Varmaste till kallaste dag",
             "Torraste till fuktigaste dag",
             "Högsta till minska mögelrisk"});
-            this.statisticsCombo.Location = new System.Drawing.Point(32, 44);
+            this.statisticsCombo.Location = new System.Drawing.Point(109, 45);
             this.statisticsCombo.Name = "statisticsCombo";
             this.statisticsCombo.Size = new System.Drawing.Size(218, 23);
             this.statisticsCombo.TabIndex = 0;
@@ -74,7 +74,7 @@ namespace VäderDataForms
             this.statisticsLabel.AutoSize = true;
             this.statisticsLabel.BackColor = System.Drawing.Color.Transparent;
             this.statisticsLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.statisticsLabel.Location = new System.Drawing.Point(32, 22);
+            this.statisticsLabel.Location = new System.Drawing.Point(109, 23);
             this.statisticsLabel.Name = "statisticsLabel";
             this.statisticsLabel.Size = new System.Drawing.Size(91, 19);
             this.statisticsLabel.TabIndex = 1;
@@ -83,7 +83,7 @@ namespace VäderDataForms
             // stastisticsSearch
             // 
             this.stastisticsSearch.BackColor = System.Drawing.SystemColors.Control;
-            this.stastisticsSearch.Location = new System.Drawing.Point(268, 44);
+            this.stastisticsSearch.Location = new System.Drawing.Point(345, 45);
             this.stastisticsSearch.Name = "stastisticsSearch";
             this.stastisticsSearch.Size = new System.Drawing.Size(75, 23);
             this.stastisticsSearch.TabIndex = 2;
@@ -100,7 +100,7 @@ namespace VäderDataForms
             this.Fuktighet});
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(32, 218);
+            this.listView1.Location = new System.Drawing.Point(109, 219);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(311, 384);
             this.listView1.TabIndex = 3;
@@ -130,7 +130,7 @@ namespace VäderDataForms
             // 
             // dateSearch
             // 
-            this.dateSearch.Location = new System.Drawing.Point(268, 127);
+            this.dateSearch.Location = new System.Drawing.Point(345, 156);
             this.dateSearch.Name = "dateSearch";
             this.dateSearch.Size = new System.Drawing.Size(75, 23);
             this.dateSearch.TabIndex = 4;
@@ -140,7 +140,7 @@ namespace VäderDataForms
             // 
             // dateInput
             // 
-            this.dateInput.Location = new System.Drawing.Point(32, 156);
+            this.dateInput.Location = new System.Drawing.Point(109, 157);
             this.dateInput.Name = "dateInput";
             this.dateInput.Size = new System.Drawing.Size(135, 23);
             this.dateInput.TabIndex = 6;
@@ -153,7 +153,7 @@ namespace VäderDataForms
             this.checkBoxOutdoor.Checked = true;
             this.checkBoxOutdoor.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxOutdoor.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxOutdoor.Location = new System.Drawing.Point(32, 127);
+            this.checkBoxOutdoor.Location = new System.Drawing.Point(109, 128);
             this.checkBoxOutdoor.Name = "checkBoxOutdoor";
             this.checkBoxOutdoor.Size = new System.Drawing.Size(85, 23);
             this.checkBoxOutdoor.TabIndex = 7;
@@ -166,7 +166,7 @@ namespace VäderDataForms
             this.checkBoxIndoor.AutoSize = true;
             this.checkBoxIndoor.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxIndoor.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBoxIndoor.Location = new System.Drawing.Point(123, 127);
+            this.checkBoxIndoor.Location = new System.Drawing.Point(200, 128);
             this.checkBoxIndoor.Name = "checkBoxIndoor";
             this.checkBoxIndoor.Size = new System.Drawing.Size(82, 23);
             this.checkBoxIndoor.TabIndex = 9;
@@ -179,7 +179,7 @@ namespace VäderDataForms
             this.dateInputLabel.AutoSize = true;
             this.dateInputLabel.BackColor = System.Drawing.Color.Transparent;
             this.dateInputLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dateInputLabel.Location = new System.Drawing.Point(32, 96);
+            this.dateInputLabel.Location = new System.Drawing.Point(109, 97);
             this.dateInputLabel.Name = "dateInputLabel";
             this.dateInputLabel.Size = new System.Drawing.Size(94, 19);
             this.dateInputLabel.TabIndex = 10;
@@ -190,7 +190,7 @@ namespace VäderDataForms
             this.faultyInputLabel.AutoSize = true;
             this.faultyInputLabel.BackColor = System.Drawing.Color.Transparent;
             this.faultyInputLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.faultyInputLabel.Location = new System.Drawing.Point(32, 182);
+            this.faultyInputLabel.Location = new System.Drawing.Point(109, 183);
             this.faultyInputLabel.Name = "faultyInputLabel";
             this.faultyInputLabel.Size = new System.Drawing.Size(215, 19);
             this.faultyInputLabel.TabIndex = 11;
@@ -202,7 +202,7 @@ namespace VäderDataForms
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(653, 631);
+            this.ClientSize = new System.Drawing.Size(542, 631);
             this.Controls.Add(this.faultyInputLabel);
             this.Controls.Add(this.dateInputLabel);
             this.Controls.Add(this.checkBoxIndoor);

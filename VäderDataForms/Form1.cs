@@ -26,23 +26,24 @@ namespace VäderDataForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //Creates items to be added into ComcoBox 
             List<ComboItem> items = new List<ComboItem>();
             items.Add(new ComboItem { ID = 1, Text = "  Utomhus" });
             items.Add(new ComboItem { ID = 2, Text = "Varmaste till kallaste dag" });
             items.Add(new ComboItem { ID = 3, Text = "Torraste till fuktigaste dag" });
-            items.Add(new ComboItem { ID = 4, Text = "Lägsta till högsta mögelrisk" });
+            items.Add(new ComboItem { ID = 4, Text = "Minsta till högsta mögelrisk" });
             items.Add(new ComboItem { ID = 5, Text = "Meteorologisk höst" });
             items.Add(new ComboItem { ID = 6, Text = "Meteorologisk vinter" });
             items.Add(new ComboItem { ID = 7, Text = "  Inomhus" });
             items.Add(new ComboItem { ID = 8, Text = "Varmaste till kallaste dag" });
             items.Add(new ComboItem { ID = 9, Text = "Torraste till fuktigaste dag" });
-            items.Add(new ComboItem { ID = 10, Text = "Lägsta till högsta mögelrisk" });
+            items.Add(new ComboItem { ID = 10, Text = "Minsta till högsta mögelrisk" });
 
             statisticsCombo.DataSource = items;
             statisticsCombo.DisplayMember = "Text";
             statisticsCombo.ValueMember = "ID";
 
+            //Adds methods to textbox to control placeholder text.
             dateInput.ForeColor = Color.Gray;
             dateInput.Text = "(YYYY-MM-DD)";
 
@@ -69,12 +70,11 @@ namespace VäderDataForms
             }
         }
 
+        //Uses the ComboBoxes ID to ensure the correct method is called. Method returns a list to be added to listview.
         private void button1_Click(object sender, EventArgs e)
         {
             int id = (int)statisticsCombo.SelectedValue;
-            
-
-            
+                     
             listView1.Items.Clear();
             listView1.Columns.Clear();
             listView1.Refresh();
@@ -97,7 +97,7 @@ namespace VäderDataForms
                     break;
 
                 case 4:
-                    resultList = OutdoorQuery.LowestToHighestMoldOutdoor();
+                    resultList = OutdoorQuery.SortLowestToHighestMoldOutdoor();
                     listView1.Columns.Add("Datum", 90, HorizontalAlignment.Center);
                     listView1.Columns.Add("Mögelrisk", 100, HorizontalAlignment.Center);
                     break;
@@ -128,7 +128,7 @@ namespace VäderDataForms
                     break;
 
                 case 10:
-                    resultList = IndoorQuery.LowestToHighestMoldIndoor();
+                    resultList = IndoorQuery.SortLowestToHighestMoldIndoor();
                     listView1.Columns.Add("Datum", 90, HorizontalAlignment.Center);
                     listView1.Columns.Add("Mögelrisk", 100, HorizontalAlignment.Center);
                     break;
@@ -148,6 +148,7 @@ namespace VäderDataForms
 
         }
 
+        //If one box is checked the other will become unchecked. To make sure only one is checked at the time.
         public void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxIndoor.Checked = !checkBoxOutdoor.Checked;
@@ -163,6 +164,8 @@ namespace VäderDataForms
 
         }
 
+        //Calls either indoor or outdoor searchmethods and adds result to listview. If there is a problem a label will be made
+        //visible saying that the date couldn't be found.
         private void button2_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();

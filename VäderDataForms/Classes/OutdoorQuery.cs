@@ -41,7 +41,7 @@ namespace VäderDataForms.Classes
         {
             using (EFContext Context = new EFContext())
             {
-                var averageTemp = Context.OutdoorTemperatures
+                var entities = Context.OutdoorTemperatures
                     .Where(t => t.Temperature != null)
                     .GroupBy(a => a.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, Avg = g.Average(a => a.Temperature) })
@@ -49,7 +49,7 @@ namespace VäderDataForms.Classes
 
                 ResultList.Clear();
 
-                foreach (var avgtemp in averageTemp)
+                foreach (var avgtemp in entities)
                 {
                     string[] array = { $"{avgtemp.Date.ToShortDateString()}", $"{Math.Round((decimal)avgtemp.Avg, 1)}" };
                     ResultList.Add(array);
@@ -62,7 +62,7 @@ namespace VäderDataForms.Classes
         {
             using (EFContext Context = new EFContext())
             {
-                var averageHumidity = Context.OutdoorTemperatures
+                var entities = Context.OutdoorTemperatures
                     .Where(h => h.Humidity != null)
                     .GroupBy(a => a.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, Avg = g.Average(a => (decimal)a.Humidity) })
@@ -70,7 +70,7 @@ namespace VäderDataForms.Classes
 
                 ResultList.Clear();
 
-                foreach (var avgHumidity in averageHumidity)
+                foreach (var avgHumidity in entities)
                 {
                     string[] array = { $"{avgHumidity.Date.ToShortDateString()}", $"{Math.Round((decimal)avgHumidity.Avg, 1)}" };
                     ResultList.Add(array);
@@ -79,11 +79,11 @@ namespace VäderDataForms.Classes
             }
         }
 
-        public static List<string[]> LowestToHighestMoldOutdoor()
+        public static List<string[]> SortLowestToHighestMoldOutdoor()
         {
             using (EFContext Context = new EFContext())
             {
-                var averageMold = Context.OutdoorTemperatures
+                var entities = Context.OutdoorTemperatures
                     .Where(d => d.Humidity != null && d.Temperature != null)
                     .GroupBy(h => h.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, averageMold = Util.MoldCalc(g.Average(a => a.Humidity), g.Average(t => t.Temperature)) })
@@ -92,7 +92,7 @@ namespace VäderDataForms.Classes
 
                 ResultList.Clear();
 
-                foreach (var day in averageMold)
+                foreach (var day in entities)
                 {
                     string[] array = { $"{day.Date.ToShortDateString()}", $"{day.averageMold}%" };
                     ResultList.Add(array);
@@ -101,11 +101,12 @@ namespace VäderDataForms.Classes
             }
         }
 
+        
         public static List<string[]> MeteorologicalAutumn()
         {
             using (EFContext Context = new EFContext())
             {
-                var averageTemp = Context.OutdoorTemperatures
+                var entities = Context.OutdoorTemperatures
                     .Where(t => t.Temperature != null)
                     .GroupBy(a => a.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, Avg = g.Average(a => a.Temperature) })
@@ -116,13 +117,15 @@ namespace VäderDataForms.Classes
                 int daysInARow = 0;
                 ResultList.Clear();
 
-                for (int i = 0; i < averageTemp.Count - 1; i++)
+                //Since autumn can't fall before 1st of August and the temperature needs to be between 0 and 10 the algorith then counts to see if
+                //there is 5 days in a row with a average temperature in that range. If 5 days in a row is found the first day is counted as the first day of autumn.
+                for (int i = 0; i < entities.Count - 1; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        if (averageTemp[i].Date.Month >= 8)
+                        if (entities[i].Date.Month >= 8)
                         {
-                            if (Math.Round((decimal)averageTemp[i + j].Avg, 1) > 0 && Math.Round((decimal)averageTemp[i + j].Avg, 1) < 10)
+                            if (Math.Round((decimal)entities[i + j].Avg, 1) > 0 && Math.Round((decimal)entities[i + j].Avg, 1) < 10)
                             {
                                 daysInARow++;
                             }
@@ -134,7 +137,7 @@ namespace VäderDataForms.Classes
 
                             if (daysInARow == 5)
                             {
-                                string[] array = { $"{averageTemp[i].Date.ToShortDateString()}" };
+                                string[] array = { $"{entities[i].Date.ToShortDateString()}" };
                                 ResultList.Add(array);
                                 break;
                             }
@@ -153,7 +156,7 @@ namespace VäderDataForms.Classes
         {
             using (EFContext Context = new EFContext())
             {
-                var averageTemp = Context.OutdoorTemperatures
+                var entities = Context.OutdoorTemperatures
                     .Where(t => t.Temperature != null)
                     .GroupBy(a => a.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, Avg = g.Average(a => a.Temperature) })
@@ -165,13 +168,15 @@ namespace VäderDataForms.Classes
                 DateTime spring = MeteorologicalSpring();
                 ResultList.Clear();
 
-                for (int i = 0; i < averageTemp.Count - 1; i++)
+                //Same as the algorithm for autumn execept that a date for spring is calculated first since winter cannot occure after spring. 
+
+                for (int i = 0; i < entities.Count - 1; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        if (averageTemp[i].Date.Month >= 8 && averageTemp[i].Date.Month <= spring.Date.Month && averageTemp[i].Date.Day < spring.Date.Day)
+                        if (entities[i].Date.Month >= 8 && entities[i].Date.Month <= spring.Date.Month && entities[i].Date.Day < spring.Date.Day)
                         {
-                            if (Math.Round((decimal)averageTemp[i + j].Avg, 1) < 0)
+                            if (Math.Round((decimal)entities[i + j].Avg, 1) < 0)
                             {
                                 daysInARow++;
                             }
@@ -183,7 +188,7 @@ namespace VäderDataForms.Classes
 
                             if (daysInARow == 5)
                             {
-                                string[] array = { $"{averageTemp[i].Date.ToShortDateString()}" };
+                                string[] array = { $"{entities[i].Date.ToShortDateString()}" };
                                 ResultList.Add(array);
                                 break;
                             }
@@ -201,11 +206,12 @@ namespace VäderDataForms.Classes
             }
         }
 
+        //Needed for calculating start of winter.
         public static DateTime MeteorologicalSpring()
         {
             using (EFContext Context = new EFContext())
             {
-                var averageTemp = Context.OutdoorTemperatures
+                var entities = Context.OutdoorTemperatures
                     .Where(t => t.Temperature != null)
                     .GroupBy(a => a.DateAndTime.Date)
                     .Select(g => new { Date = g.Key, Avg = g.Average(a => a.Temperature) })
@@ -215,13 +221,16 @@ namespace VäderDataForms.Classes
 
                 int daysInARow = 0;
 
-                for (int i = 0; i < averageTemp.Count - 1; i++)
+                //Same as the algorith for autumn except that spring cannot occure before the 15 february.
+                //Used to calculate winter.
+
+                for (int i = 0; i < entities.Count - 1; i++)
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        if (averageTemp[i].Date.Month >= 2 && averageTemp[i].Date.Day >= 15)
+                        if (entities[i].Date.Month >= 2 && entities[i].Date.Day >= 15)
                         {
-                            if (Math.Round((decimal)averageTemp[i + j].Avg, 1) > 0 && Math.Round((decimal)averageTemp[i + j].Avg, 1) < 10)
+                            if (Math.Round((decimal)entities[i + j].Avg, 1) > 0 && Math.Round((decimal)entities[i + j].Avg, 1) < 10)
                             {
                                 daysInARow++;
                             }
@@ -233,7 +242,7 @@ namespace VäderDataForms.Classes
 
                             if (daysInARow == 7)
                             {
-                                DateTime spring = averageTemp[i].Date;
+                                DateTime spring = entities[i].Date;
                                 return spring;
                             }
                         }

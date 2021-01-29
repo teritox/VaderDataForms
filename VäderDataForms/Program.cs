@@ -15,7 +15,9 @@ namespace VäderDataForms
         [STAThread]
         static void Main()
         {
+            //Imports data to databas at start if the databas is empty.
             FileImport.ImportTemperatures();
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VäderDataForms.Classes
 {
+    //Class for creating items for ComboBox.
     class ComboItem
     {
         public int ID { get; set; }
